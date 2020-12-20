@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>抽奖</title>
+<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body >
+
+<div class='luck-back'>
+	<!-- 左边区域 -->
+	<div class="luck-draw">
+		<div class="luck-draw-title">
+			<span>抽奖设置</span>
+		</div>
+		<div>
+			<div class="h1 prize-rank">
+				<span id="prizeRank" onclick="changMun()" onselectstart="return  false"></span>	
+			</div>  
+		</div>
+		<div class="prize">
+			<img id='imageId' src="img/prize1.jfif" alt="礼品">
+		</div>
+		<div class="count">
+			<button type="button" class="btn" onclick="reduce()">-</button>
+			 抽<span id='luck-count'></span>人
+			<button type="button" class="btn" onclick="add()">+</button>
+		</div>
+		<div class="luck-content-btn1 luck-user-btn">
+			<a id="start" class="start" onclick="start()">开始</a>
+		</div>
+	</div>
+
+	<div class="stars"></div>  <!-- 背景繁星 -->
+
+
+
+
+	<!-- <div class="luck-content ce-pack-end">
+		<div id="luckuser" class="slotMachine">
+			<div class="slot">                       
+				<span class="name">姓名</span>                   
+			</div>
+		</div>
+	</div> -->
+
+
+	<div class="luck-content ce-pack-end">
+		<div class="slotMachine slotMachine1">
+			<div class="slot">                       
+				<span class="name">姓名</span>                   
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- 右边区域 -->
+	
+	<div class="luck-user">
+		<div class="luck-user-title">
+			<span>中奖名单</span>
+		</div>
+		<ul class="luck-user-list"></ul>
+		<div class="luck-user-btn">
+			<a href="#" onclick="tableToExcel()">中奖人名单导出</a>
+		</div>
+	</div>
+</div>
+
+<script src="js/jquery-2.2.1.min.js" type="text/javascript"></script>
+<script>
+	var xinm = new Array();
+	xinm[0] = "img/1.jpg"
+	xinm[1] = "img/2.jpg"
+	xinm[2] = "img/3.jpg"
+	xinm[3] = "img/4.jpg"
+	xinm[4] = "img/5.jpg"
+	xinm[5] = "img/6.jpg"
+	xinm[6] = "img/1.jpg"
+	xinm[7] = "img/2.jpg"
+	xinm[8] = "img/3.jpg"
+	xinm[9] = "img/4.jpg"
+	xinm[10] = "img/5.jpg"
+	xinm[11] = "img/6.jpg"
+	
+	xinm[12] = "img/3.jpg"
+	xinm[13] = "img/4.jpg"
+	xinm[14] = "img/5.jpg"
+	xinm[15] = "img/6.jpg"
+	xinm[16] = "img/1.jpg"
+	xinm[17] = "img/2.jpg"
+	xinm[18] = "img/3.jpg"
+	xinm[19] = "img/4.jpg"
+	xinm[20] = "img/5.jpg"
+	xinm[21] = "img/6.jpg"
+	
+	xinm[22] = "img/3.jpg"
+	xinm[23] = "img/4.jpg"
+	xinm[24] = "img/5.jpg"
+	xinm[25] = "img/6.jpg"
+	xinm[26] = "img/1.jpg"
+	xinm[27] = "img/2.jpg"
+	xinm[28] = "img/3.jpg"
+	xinm[29] = "img/4.jpg"
+	xinm[30] = "img/5.jpg"
+
+	var phone = new Array();
+	phone[0] = "王尼玛"
+	phone[1] = "张全蛋"
+	phone[2] = "纸巾老撕"
+	phone[3] = "王铁柱"
+	phone[4] = "田二妞"
+	phone[5] = "唐马儒"
+	phone[6] = "张三"
+	phone[7] = "李四"
+	phone[8] = "王二麻子"
+	phone[9] = "咯咯咯"
+	phone[10] = "一二三"
+	phone[11] = "四五六"
+	phone[12] = "纸巾老撕"
+	phone[13] = "王铁柱"
+	phone[14] = "田二妞"
+	phone[15] = "唐马儒"
+	phone[16] = "张三"
+	phone[17] = "李四"
+	phone[18] = "王二麻子"
+	phone[19] = "咯咯咯"
+	phone[20] = "一二三"
+	phone[21] = "张全蛋"
+	phone[22] = "纸巾老撕"
+	phone[23] = "王铁柱"
+	phone[24] = "田二妞"
+	phone[25] = "唐马儒"
+	phone[27] = "张三"
+	phone[28] = "王二麻子"
+	phone[29] = "咯咯咯"
+	phone[30] = "一二三"
+
+	var luckNum = new Array();
+
+	luckNum[0] = "13412345678"
+	luckNum[1] = "13412345678"
+	luckNum[2] = "13412345678"
+	luckNum[3] = "13412345678"
+	luckNum[4] = "13412345678"
+	luckNum[5] = "13412345678"
+	luckNum[6] = "13412345678"
+	luckNum[7] = "13412345678"
+	luckNum[8] = "13412345678"
+	luckNum[9] = "13412345678"
+	luckNum[10] = "13412345678"
+	luckNum[11] = "13412345678"
+	luckNum[12] = "13412345678"
+	luckNum[13] = "13412345678"
+	luckNum[14] = "13412345678"
+	luckNum[15] = "13412345678"
+	luckNum[16] = "13412345678"
+	luckNum[17] = "13412345678"
+	luckNum[18] = "13412345678"
+	luckNum[19] = "13412345678"
+	luckNum[20] = "13412345678"
+	luckNum[21] = "13412345678"
+	luckNum[22] = "13412345678"
+	luckNum[23] = "13412345678"
+	luckNum[24] = "13412345678"
+	luckNum[25] = "13412345678"
+	luckNum[26] = "13412345678"
+	luckNum[27] = "13412345678"
+	luckNum[28] = "13412345678"
+	luckNum[29] = "13412345678"
+	luckNum[30] = "13412345678"
+
+
+
+</script>
+<script src="js/Luckdraw.js" type="text/javascript"></script>
+</body>
+</html>
